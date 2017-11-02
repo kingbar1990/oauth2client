@@ -54,7 +54,9 @@ class CredentialsField(models.Field):
                     base64.b64decode(encoding.smart_bytes(value)).decode())
             except ValueError:
                 return pickle.loads(
-                    base64.b64decode(encoding.smart_bytes(value)))
+                    base64.b64decode(encoding.smart_bytes(value)),
+                    encoding='bytes'
+                )
 
     def get_prep_value(self, value):
         """Overrides ``models.Field`` method. This is used to convert
